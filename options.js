@@ -11,8 +11,15 @@ chrome.storage.local.get("urlname", ({ urlname }) => {
 saveBtn.addEventListener("click", async () => {
   const val = input.value.trim();
   if (!val) return;
+  const { urlname: prev } = await chrome.storage.local.get("urlname");
+  if (prev && prev !== val) {
+    await chrome.storage.local.remove([
+      "followers", "userKey", "lastChecked", "lastResult", "progress", "checkStartedAt",
+    ]);
+  } else {
+    await chrome.storage.local.remove("lastResult");
+  }
   await chrome.storage.local.set({ urlname: val });
-  await chrome.storage.local.remove("lastResult");
   savedMsg.style.display = "block";
   setTimeout(() => { savedMsg.style.display = "none"; }, 2000);
 });
