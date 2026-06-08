@@ -74,8 +74,8 @@ function renderDiffList(tab) {
 
   const { added, removed } = currentDiff;
   const badgeMap = {
-    added:   { cls: "badge-added",   label: "新規" },
-    removed: { cls: "badge-removed", label: "外し" },
+    added:   { cls: "badge-added",   label: "増加" },
+    removed: { cls: "badge-removed", label: "減少" },
   };
 
   let entries;
