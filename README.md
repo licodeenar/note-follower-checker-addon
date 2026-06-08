@@ -10,7 +10,7 @@ note.com のフォロワーの増減を確認できる Chrome 拡張機能です
 
 ## インストール
 
-1. このリポジトリを ZIP でダウンロードして展開
+1. [ZIPをダウンロード](https://github.com/licodeenar/note-follower-checker-addon/archive/refs/heads/main.zip)して展開
 2. Chrome で `chrome://extensions` を開く
 3. 右上の「デベロッパーモード」をオン
 4. 「パッケージ化されていない拡張機能を読み込む」から展開したフォルダを選択
