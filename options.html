@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>note フォロワーチェッカー - 設定</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      max-width: 480px;
+      margin: 40px auto;
+      padding: 0 20px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 14px;
+      color: #333;
+    }
+
+    h1 {
+      font-size: 18px;
+      margin-bottom: 24px;
+      color: #41c9b4;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .hint {
+      font-size: 12px;
+      color: #888;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      font-size: 14px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input[type="text"]:focus {
+      border-color: #41c9b4;
+    }
+
+    button {
+      margin-top: 14px;
+      padding: 9px 24px;
+      background: #41c9b4;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    button:hover { opacity: 0.85; }
+
+    #saved-msg {
+      display: none;
+      margin-top: 10px;
+      color: #1aaf96;
+      font-size: 13px;
+    }
+
+    .danger-zone {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #eee;
+    }
+
+    .danger-zone h2 {
+      font-size: 14px;
+      color: #e05555;
+      margin-bottom: 8px;
+    }
+
+    #reset-btn {
+      background: #e05555;
+      margin-top: 0;
+    }
+
+    #reset-msg {
+      display: none;
+      margin-top: 10px;
+      color: #e05555;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <h1>note フォロワーチェッカー 設定</h1>
+
+  <div>
+    <label for="urlname-input">あなたの note ID</label>
+    <p class="hint">例: <code>https://note.com/<strong>your_urlname</strong></code> の場合は <strong>your_urlname</strong></p>
+    <input type="text" id="urlname-input" placeholder="note IDを入力" />
+    <button id="save-btn">保存</button>
+    <div id="saved-msg">保存しました。</div>
+  </div>
+
+  <div class="danger-zone">
+    <h2>スナップショットをリセット</h2>
+    <p style="font-size:12px; color:#888; margin-bottom:10px;">
+      保存済みフォロワーデータを削除します。次回チェック時に再ベースラインを取得します。
+    </p>
+    <button id="reset-btn">リセット</button>
+    <div id="reset-msg">スナップショットを削除しました。</div>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>
