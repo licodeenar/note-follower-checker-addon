@@ -14,7 +14,6 @@ const lastCheckedEl = document.getElementById("last-checked");
 const summaryEl = document.getElementById("summary");
 const tabsEl = document.getElementById("tabs");
 const diffListEl = document.getElementById("diff-list");
-const msgBaseline = document.getElementById("msg-baseline");
 const errorMsg = document.getElementById("error-msg");
 const warnMsg = document.getElementById("warn-msg");
 const cntAdded = document.getElementById("cnt-added");
@@ -111,7 +110,6 @@ function hideResults() {
   summaryEl.style.display = "none";
   tabsEl.style.display = "none";
   diffListEl.style.display = "none";
-  msgBaseline.style.display = "none";
   errorMsg.style.display = "none";
   warnMsg.style.display = "none";
 }
@@ -129,11 +127,6 @@ function showResult(result) {
     const expectedText = result.expected != null ? `（実際は ${result.expected} 件）` : "";
     warnMsg.textContent = `⚠️ API制限により ${result.total} 件のみ取得${expectedText}。差分は参考値です。`;
     warnMsg.style.display = "block";
-  }
-
-  if (result.isBaseline) {
-    msgBaseline.style.display = "block";
-    return;
   }
 
   currentDiff = result.diff;

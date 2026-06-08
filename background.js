@@ -117,7 +117,7 @@ chrome.runtime.onMessage.addListener((message) => {
           await chrome.storage.local.set({
             checking: false,
             progress: 0,
-            lastResult: { isBaseline: true, total: fetched, incomplete, expected },
+            lastResult: { isBaseline: false, diff: { added: [], removed: [] }, total: fetched, incomplete, expected },
           });
           return;
         }
