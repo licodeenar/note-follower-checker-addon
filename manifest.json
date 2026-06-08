@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "note フォロワーチェッカー",
-  "version": "1.0",
+  "version": "1.1",
   "description": "note.com のフォロワー差分を確認する",
   "permissions": ["storage"],
   "host_permissions": ["https://note.com/*"],
@@ -19,6 +19,7 @@
     "48": "icons/icon48.png",
     "128": "icons/icon128.png"
   },
+  "homepage_url": "https://github.com/licodeenar/note-follower-checker-addon",
   "background": {
     "service_worker": "background.js"
   }

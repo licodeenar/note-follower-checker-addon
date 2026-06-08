@@ -93,6 +93,22 @@
       color: #e05555;
       font-size: 13px;
     }
+
+    #version {
+      margin-top: 40px;
+      text-align: right;
+      font-size: 11px;
+      color: #bbb;
+    }
+
+    #version a {
+      color: #bbb;
+      text-decoration: none;
+    }
+
+    #version a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -114,6 +130,8 @@
     <button id="reset-btn">リセット</button>
     <div id="reset-msg">スナップショットを削除しました。</div>
   </div>
+
+  <div id="version"></div>
 
   <script src="options.js"></script>
 </body>

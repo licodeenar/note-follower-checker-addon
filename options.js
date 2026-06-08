@@ -1,4 +1,7 @@
 const input = document.getElementById("urlname-input");
+const manifest = chrome.runtime.getManifest();
+const versionEl = document.getElementById("version");
+versionEl.innerHTML = `<a href="${manifest.homepage_url}" target="_blank" rel="noopener noreferrer">v${manifest.version}</a>`;
 const saveBtn = document.getElementById("save-btn");
 const savedMsg = document.getElementById("saved-msg");
 const resetBtn = document.getElementById("reset-btn");
