@@ -4,6 +4,7 @@ const PER_PAGE = 20;
 const MAX_FOLLOWERS = 1000;
 let isChecking = false;
 
+
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -137,6 +138,8 @@ chrome.runtime.onMessage.addListener((message) => {
         });
       } finally {
         isChecking = false;
+        chrome.action.setBadgeText({ text: " " });
+        chrome.action.setBadgeBackgroundColor({ color: "#E0245E" });
       }
     })();
     // fire-and-forget: return true 不要

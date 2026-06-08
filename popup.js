@@ -150,6 +150,7 @@ async function loadLastChecked() {
 
 // popup 起動時に現在の state を復元
 async function restoreState() {
+  chrome.action.setBadgeText({ text: "" });
   let { checking, progress, lastResult, checkStartedAt } = await chrome.storage.local.get([
     "checking", "progress", "lastResult", "checkStartedAt",
   ]);
