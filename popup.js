@@ -5,8 +5,9 @@ let isCooldown = false;
 
 const COOLDOWN_MS = 10 * 60 * 1000;
 // service worker が取得途中で停止すると checking:true が残るため、
-// この時間を超えた checking はスタックとみなしてリセットする（最大取得時間 ~12分 + 余裕）
-const STALE_CHECK_MS = 20 * 60 * 1000;
+// この時間を超えた checking はスタックとみなしてリセットする
+// （最大取得時間は 50ページ × 0.7s 待機 + 通信時間 ≒ 1分強。余裕を見て5分）
+const STALE_CHECK_MS = 5 * 60 * 1000;
 
 const checkBtn = document.getElementById("check-btn");
 const statusEl = document.getElementById("status");

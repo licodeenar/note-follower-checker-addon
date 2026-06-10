@@ -45,7 +45,10 @@ async function fetchAllFollowers(userKey, followerCount) {
     await sleep(DELAY_MS);
   }
 
-  const incomplete = followers.length < followerCount;
+  // followerCount が API から取れなかった場合は、上限到達を不完全とみなす
+  const incomplete = followerCount != null
+    ? followers.length < followerCount
+    : followers.length >= MAX_FOLLOWERS;
   return { followers, incomplete, fetched: followers.length, expected: followerCount };
 }
 
@@ -110,6 +113,18 @@ chrome.runtime.onMessage.addListener((message) => {
         const { followers: newFollowers, incomplete, fetched, expected } =
           await fetchAllFollowers(userKey, followerCount);
 
+        // 取得中に設定画面で note ID が変更されていたら、旧アカウントの結果を破棄する
+        // （変更時のストレージクリア後に旧データを書き戻してしまうのを防ぐ）
+        const { urlname: currentUrlname } = await chrome.storage.local.get("urlname");
+        if (currentUrlname !== urlname) {
+          await chrome.storage.local.set({
+            checking: false,
+            progress: 0,
+            lastResult: { error: "取得中に note ID が変更されたため、結果を破棄しました。もう一度チェックしてください。" },
+          });
+          return;
+        }
+
         const { followers: prevFollowers } = await chrome.storage.local.get("followers");
         const now = new Date().toISOString();
 
@@ -138,8 +153,13 @@ chrome.runtime.onMessage.addListener((message) => {
         });
       } finally {
         isChecking = false;
-        chrome.action.setBadgeText({ text: " " });
-        chrome.action.setBadgeBackgroundColor({ color: "#E0245E" });
+        // バッジは「閉じて待っている人」への完了通知。popup が開いていて
+        // 結果がその場で見えている場合は付けない
+        const contexts = await chrome.runtime.getContexts({ contextTypes: ["POPUP"] });
+        if (contexts.length === 0) {
+          chrome.action.setBadgeText({ text: " " });
+          chrome.action.setBadgeBackgroundColor({ color: "#E0245E" });
+        }
       }
     })();
     // fire-and-forget: return true 不要

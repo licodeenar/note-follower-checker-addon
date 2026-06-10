@@ -11,9 +11,18 @@ chrome.storage.local.get("urlname", ({ urlname }) => {
   if (urlname) input.value = urlname;
 });
 
+// フルURL（https://note.com/xxx）や @付き入力から urlname を抽出する
+function normalizeUrlname(raw) {
+  let val = raw.trim();
+  const m = val.match(/note\.com\/([^/?#\s]+)/);
+  if (m) val = m[1];
+  return val.replace(/^@/, "");
+}
+
 saveBtn.addEventListener("click", async () => {
-  const val = input.value.trim();
+  const val = normalizeUrlname(input.value);
   if (!val) return;
+  input.value = val;
   const { urlname: prev } = await chrome.storage.local.get("urlname");
   if (prev && prev !== val) {
     await chrome.storage.local.remove([
